@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5475317400885195"
-     crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5475317400885195"
+     crossorigin="anonymous"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5475317400885195",
+    enable_page_level_ads: true
+  });
+</script>
 <title>Where You Stand — Global Income Rank</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
@@ -175,40 +181,6 @@
     min-height:16px;
   }
 
-  /* ---- Ad gate screen ---- */
-  .adgate{
-    display:none;
-    text-align:center;
-  }
-  .adgate.active{ display:block; }
-  .adgate .adslot{
-    border:1px dashed rgba(241,239,230,0.35);
-    padding:40px 20px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.05em;
-    color:#8FA091;
-    margin-bottom:20px;
-    min-height:220px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-  }
-  .adgate .adslot .tag{
-    color:var(--gold);
-    text-transform:uppercase;
-    letter-spacing:0.14em;
-    font-size:11px;
-  }
-  .countdown{
-    font-family:'Fraunces',serif;
-    font-size:15px;
-    color:#C7D0C8;
-  }
-  .countdown b{ color:var(--gold); font-weight:600; }
-
   /* ---- Result screen ---- */
   .result{ display:none; }
   .result.active{ display:block; }
@@ -312,22 +284,7 @@
       <button class="go" id="submitBtn">See my global rank</button>
     </div>
 
-    <!-- STEP 2: AD GATE -->
-    <div class="adgate" id="adStep">
-      <div class="adslot" id="adSlot">
-        <span class="tag">Advertisement</span>
-        <!-- Income percentile -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-5475317400885195"
-             data-ad-slot="7673424118"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
-      <div class="countdown">Your result unlocks in <b id="secLeft">3</b>s</div>
-    </div>
-
-    <!-- STEP 3: RESULT -->
+    <!-- STEP 2: RESULT -->
     <div class="result" id="resultStep">
       <div class="result-label">You earn more than</div>
       <div class="bigstat" id="pctBig">—<sup>%</sup></div>
@@ -397,19 +354,15 @@
   }
 
   const formStep = document.getElementById('formStep');
-  const adStep = document.getElementById('adStep');
   const resultStep = document.getElementById('resultStep');
   const incomeInput = document.getElementById('income');
   const errorMsg = document.getElementById('errorMsg');
   const submitBtn = document.getElementById('submitBtn');
-  const secLeft = document.getElementById('secLeft');
   const pctBig = document.getElementById('pctBig');
   const resultCopy = document.getElementById('resultCopy');
   const fill = document.getElementById('fill');
   const marker = document.getElementById('marker');
   const againBtn = document.getElementById('againBtn');
-
-  let countdownTimer = null;
 
   submitBtn.addEventListener('click', () => {
     const val = parseFloat(incomeInput.value);
@@ -419,31 +372,10 @@
     }
     errorMsg.textContent = '';
     formStep.style.display = 'none';
-    adStep.classList.add('active');
-
-    // Request the ad only now, since the slot is hidden (display:none) until this point.
-    // Pushing while hidden can cause AdSense to size it incorrectly or skip it.
-    try {
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.warn('AdSense not available in this environment:', e);
-    }
-
-    let n = 3;
-    secLeft.textContent = n;
-    clearInterval(countdownTimer);
-    countdownTimer = setInterval(() => {
-      n -= 1;
-      secLeft.textContent = Math.max(n,0);
-      if(n <= 0){
-        clearInterval(countdownTimer);
-        showResult(val);
-      }
-    }, 1000);
+    showResult(val);
   });
 
   function showResult(income){
-    adStep.classList.remove('active');
     resultStep.classList.add('active');
 
     const pct = percentileFor(income);
@@ -467,8 +399,5 @@
   });
 </script>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5475317400885195"
-     crossorigin="anonymous"></script>
-
 </body>
-  </html>
+</html>
