@@ -11,7 +11,7 @@
     enable_page_level_ads: true
   });
 </script>
-<title>Where You Stand — Global Income Rank</title>
+<title>How Tall Are You — Really?</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
 
@@ -21,7 +21,6 @@
     --gold:#C9A24B;
     --moss:#3E5C4E;
     --moss-deep:#22352C;
-    --line: rgba(15,26,22,0.14);
   }
 
   *{box-sizing:border-box;}
@@ -37,10 +36,7 @@
     padding:24px;
   }
 
-  .stage{
-    width:100%;
-    max-width:560px;
-  }
+  .stage{ width:100%; max-width:560px; }
 
   .eyebrow{
     font-family:'IBM Plex Mono',monospace;
@@ -53,13 +49,7 @@
     gap:10px;
     margin-bottom:18px;
   }
-  .eyebrow::before{
-    content:"";
-    width:22px;
-    height:1px;
-    background:var(--moss);
-    display:inline-block;
-  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--moss); display:inline-block; }
 
   h1{
     font-family:'Fraunces',serif;
@@ -69,10 +59,7 @@
     margin:0 0 14px;
     letter-spacing:-0.01em;
   }
-  h1 em{
-    font-style:italic;
-    color:var(--gold);
-  }
+  h1 em{ font-style:italic; color:var(--gold); }
 
   .sub{
     font-size:15.5px;
@@ -108,20 +95,36 @@
     margin-bottom:10px;
   }
 
+  .segrow{
+    display:flex;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .seg{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border:1px solid rgba(241,239,230,0.25);
+    background:rgba(241,239,230,0.04);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:#C7D0C8;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .seg.selected{
+    background:var(--gold);
+    color:var(--moss-deep);
+    border-color:var(--gold);
+  }
+
   .input-row{
     display:flex;
     align-items:stretch;
     border:1px solid rgba(241,239,230,0.25);
     background:rgba(241,239,230,0.04);
-  }
-  .input-row .prefix{
-    display:flex;
-    align-items:center;
-    padding:0 14px;
-    font-family:'IBM Plex Mono',monospace;
-    color:var(--gold);
-    font-size:15px;
-    border-right:1px solid rgba(241,239,230,0.18);
   }
   input[type="number"]{
     flex:1;
@@ -150,11 +153,7 @@
   }
   select option{ color:#0F1A16; }
 
-  .hint{
-    font-size:12.5px;
-    color:#93A196;
-    margin-top:10px;
-  }
+  .hint{ font-size:12.5px; color:#93A196; margin-top:10px; }
 
   button.go{
     margin-top:26px;
@@ -172,16 +171,9 @@
   }
   button.go:hover{ background:#DDB865; }
   button.go:active{ transform:scale(0.985); }
-  button.go:disabled{ opacity:0.5; cursor:not-allowed; }
 
-  .error{
-    color:#E8A0A0;
-    font-size:12.5px;
-    margin-top:10px;
-    min-height:16px;
-  }
+  .error{ color:#E8A0A0; font-size:12.5px; margin-top:10px; min-height:16px; }
 
-  /* ---- Result screen ---- */
   .result{ display:none; }
   .result.active{ display:block; }
 
@@ -252,41 +244,42 @@
   }
   .again:hover{ border-color:var(--gold); color:var(--gold); }
 
-  .foot-note{
-    font-size:11.5px;
-    color:#8B948B;
-    margin-top:22px;
-    line-height:1.5;
-  }
+  .foot-note{ font-size:11.5px; color:#8B948B; margin-top:22px; line-height:1.5; }
 </style>
 </head>
 <body>
 
 <div class="stage">
-  <div class="eyebrow">Global Income Position</div>
-  <h1>Where do you stand among <em>8 billion</em> people?</h1>
-  <p class="sub">Enter what you earn in a typical month. We'll estimate what share of the world's population earns less than you — based on global income distribution data.</p>
+  <div class="eyebrow">Global Height Position</div>
+  <h1>How tall are you, <em>really</em>?</h1>
+  <p class="sub">Enter your height and we'll estimate what share of adults worldwide are shorter than you — based on global height averages.</p>
 
   <div class="card">
 
-    <!-- STEP 1: FORM -->
-    <div class="form active" id="formStep">
-      <label for="income">Monthly income</label>
+    <!-- FORM -->
+    <div id="formStep">
+      <label>Compare against</label>
+      <div class="segrow">
+        <div class="seg selected" data-gender="male">Men</div>
+        <div class="seg" data-gender="female">Women</div>
+      </div>
+
+      <label for="height">Your height</label>
       <div class="input-row">
-        <span class="prefix">$</span>
-        <input type="number" id="income" placeholder="e.g. 2500" min="0" step="1">
-        <select id="currency">
-          <option value="1">USD</option>
+        <input type="number" id="height" placeholder="e.g. 175" min="0" step="0.1">
+        <select id="unit">
+          <option value="cm">cm</option>
+          <option value="in">inches</option>
         </select>
       </div>
-      <div class="hint">We convert this to a global comparison automatically. All figures are approximate estimates, not official statistics.</div>
+      <div class="hint">Compared against the global adult average for the group you picked. All figures are approximate estimates, not official statistics.</div>
       <div class="error" id="errorMsg"></div>
       <button class="go" id="submitBtn">See my global rank</button>
     </div>
 
-    <!-- STEP 2: RESULT -->
+    <!-- RESULT -->
     <div class="result" id="resultStep">
-      <div class="result-label">You earn more than</div>
+      <div class="result-label">You're taller than</div>
       <div class="bigstat" id="pctBig">—<sup>%</sup></div>
       <div class="result-copy" id="resultCopy"></div>
 
@@ -295,67 +288,55 @@
         <div class="marker" id="marker"></div>
       </div>
       <div class="spectrum-labels">
-        <span>Poorest</span>
-        <span>Richest</span>
+        <span>Shortest</span>
+        <span>Tallest</span>
       </div>
 
-      <button class="again" id="againBtn">Check another amount</button>
+      <button class="again" id="againBtn">Check another height</button>
     </div>
 
   </div>
 
-  <p class="foot-note">Estimates derived from published global household income distribution figures (World Bank / World Inequality Database style deciles). Intended as a rough, illustrative comparison — not a precise or official ranking.</p>
+  <p class="foot-note">Estimates use approximate global adult height averages and typical variation (standard deviation) by gender. Intended as a rough, illustrative comparison — not a precise or clinical measurement.</p>
 </div>
 
 <script>
-  // ---- Approximate global monthly income (USD) -> percentile below you ----
-  // Anchors loosely based on public global income distribution estimates.
-  // (income in USD/month, percentile of world population earning less)
-  const anchors = [
-    [0, 0],
-    [15, 8],
-    [30, 20],
-    [50, 33],
-    [83, 50],
-    [120, 60],
-    [180, 68],
-    [260, 75],
-    [400, 82],
-    [600, 87],
-    [850, 90.5],
-    [1200, 93],
-    [1800, 95],
-    [2500, 96.5],
-    [4000, 98],
-    [6500, 99],
-    [10000, 99.5],
-    [20000, 99.8],
-    [50000, 99.95],
-    [200000, 99.99]
-  ];
+  // Approximate global adult height stats (cm)
+  const stats = {
+    male:   { mean: 171, sd: 7.2 },
+    female: { mean: 159, sd: 6.6 }
+  };
 
-  function percentileFor(income){
-    if(income <= 0) return 0;
-    if(income >= anchors[anchors.length-1][0]) return 99.99;
-
-    for(let i=0;i<anchors.length-1;i++){
-      const [x0,y0] = anchors[i];
-      const [x1,y1] = anchors[i+1];
-      if(income >= x0 && income <= x1){
-        // log-interpolate on income, linear on percentile
-        const logx0 = Math.log(Math.max(x0,1));
-        const logx1 = Math.log(x1);
-        const logx = Math.log(Math.max(income,1));
-        const t = (logx - logx0) / (logx1 - logx0 || 1);
-        return y0 + t*(y1-y0);
-      }
-    }
-    return 50;
+  // Standard normal CDF via erf approximation (Abramowitz & Stegun)
+  function normalCDF(z){
+    const t = 1/(1+0.2316419*Math.abs(z));
+    const d = 0.3989423*Math.exp(-z*z/2);
+    let p = d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));
+    if(z>0) p = 1-p;
+    return 1-p;
   }
+
+  function percentileFor(heightCm, gender){
+    const { mean, sd } = stats[gender];
+    const z = (heightCm - mean) / sd;
+    let pct = normalCDF(z) * 100;
+    pct = Math.min(Math.max(pct, 0.1), 99.9);
+    return pct;
+  }
+
+  let selectedGender = 'male';
+  document.querySelectorAll('.seg').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.seg').forEach(s => s.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedGender = el.dataset.gender;
+    });
+  });
 
   const formStep = document.getElementById('formStep');
   const resultStep = document.getElementById('resultStep');
-  const incomeInput = document.getElementById('income');
+  const heightInput = document.getElementById('height');
+  const unitSelect = document.getElementById('unit');
   const errorMsg = document.getElementById('errorMsg');
   const submitBtn = document.getElementById('submitBtn');
   const pctBig = document.getElementById('pctBig');
@@ -365,24 +346,29 @@
   const againBtn = document.getElementById('againBtn');
 
   submitBtn.addEventListener('click', () => {
-    const val = parseFloat(incomeInput.value);
-    if(isNaN(val) || val < 0){
-      errorMsg.textContent = 'Enter a valid monthly income to continue.';
+    let val = parseFloat(heightInput.value);
+    if(isNaN(val) || val <= 0){
+      errorMsg.textContent = 'Enter a valid height to continue.';
+      return;
+    }
+    let cm = unitSelect.value === 'in' ? val * 2.54 : val;
+    if(cm < 100 || cm > 230){
+      errorMsg.textContent = 'Enter a realistic adult height.';
       return;
     }
     errorMsg.textContent = '';
     formStep.style.display = 'none';
-    showResult(val);
+    showResult(cm);
   });
 
-  function showResult(income){
+  function showResult(cm){
     resultStep.classList.add('active');
-
-    const pct = percentileFor(income);
-    const pctDisplay = pct >= 99.9 ? pct.toFixed(2) : pct.toFixed(1);
+    const pct = percentileFor(cm, selectedGender);
+    const pctDisplay = pct >= 99.9 || pct <= 0.1 ? pct.toFixed(1) : pct.toFixed(1);
+    const groupLabel = selectedGender === 'male' ? 'men' : 'women';
 
     pctBig.innerHTML = pctDisplay + '<sup>%</sup>';
-    resultCopy.innerHTML = `At <b>$${income.toLocaleString()}</b> a month, you earn more than an estimated <b>${pctDisplay}%</b> of people worldwide — putting you in roughly the top <b>${(100-pct).toFixed(pct>=99.9?2:1)}%</b> globally.`;
+    resultCopy.innerHTML = `Among ${groupLabel} worldwide, an estimated <b>${pctDisplay}%</b> are shorter than you — putting you in roughly the top <b>${(100-pct).toFixed(1)}%</b> for height.`;
 
     requestAnimationFrame(() => {
       fill.style.width = pct + '%';
@@ -394,7 +380,7 @@
     resultStep.classList.remove('active');
     fill.style.width = '0%';
     marker.style.left = '0%';
-    incomeInput.value = '';
+    heightInput.value = '';
     formStep.style.display = 'block';
   });
 </script>
