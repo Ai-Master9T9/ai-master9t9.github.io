@@ -245,11 +245,31 @@
   .again:hover{ border-color:var(--gold); color:var(--gold); }
 
   .foot-note{ font-size:11.5px; color:#8B948B; margin-top:22px; line-height:1.5; }
+
+  nav{ display:flex; gap:18px; flex-wrap:wrap; margin-bottom:36px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.05em; }
+  nav a{ color:var(--moss); text-decoration:none; text-transform:uppercase; }
+  nav a:hover{ color:var(--gold); }
+
+  .article{ margin-top:52px; }
+  .article h2{ font-family:'Fraunces',serif; font-size:21px; margin:0 0 12px; }
+  .article p{ font-size:14.5px; line-height:1.7; color:#3A423D; margin:0 0 16px; max-width:60ch; }
+
+  footer{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#8B948B; display:flex; gap:16px; flex-wrap:wrap; border-top:1px solid rgba(15,26,22,0.12); padding-top:20px; margin-top:52px; }
+  footer a{ color:#8B948B; }
+  footer a:hover{ color:var(--gold); }
 </style>
 </head>
 <body>
 
 <div class="stage">
+  <nav>
+    <a href="/">Home</a>
+    <a href="/income/">Income Tool</a>
+    <a href="/height-percentile/">Height Tool</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+
   <div class="eyebrow">Global Height Position</div>
   <h1>How tall are you, <em>really</em>?</h1>
   <p class="sub">Enter your height and we'll estimate what share of adults worldwide are shorter than you — based on global height averages.</p>
@@ -298,6 +318,21 @@
   </div>
 
   <p class="foot-note">Estimates use approximate global adult height averages and typical variation (standard deviation) by gender. Intended as a rough, illustrative comparison — not a precise or clinical measurement.</p>
+
+  <div class="article">
+    <h2>Why height varies so much around the world</h2>
+    <p>Average adult height differs noticeably from country to country, shaped by a mix of genetics, nutrition, healthcare access, and childhood living conditions. Nations with strong early-life nutrition and healthcare tend to have taller average populations, while historical or ongoing food insecurity in a region can measurably lower average adult height over generations.</p>
+    <p>Because of this spread, "average height" is really a range rather than a single fixed number. This tool uses a broad global average and typical variation for men and women, so the estimate reflects a worldwide comparison rather than any single country's standard.</p>
+    <h2>How this estimate is calculated</h2>
+    <p>We use an approximate global average height and standard deviation for each gender, and calculate where your height falls on that distribution using a standard statistical model (a normal distribution curve). This gives a reasonable, fast estimate of your percentile — not a clinical or population-specific measurement.</p>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 Compared</span>
+    <a href="/privacy/">Privacy Policy</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </footer>
 </div>
 
 <script>
