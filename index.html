@@ -11,104 +11,92 @@
     enable_page_level_ads: true
   });
 </script>
-<title>Where You Stand — Global Income Rank</title>
+<title>Compared — Fun Global Comparison Tools</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
-
-  :root{
-    --ink:#0F1A16;
-    --paper:#F1EFE6;
-    --gold:#C9A24B;
-    --moss:#3E5C4E;
-    --moss-deep:#22352C;
-    --line: rgba(15,26,22,0.14);
-  }
-
+  :root{ --ink:#0F1A16; --paper:#F1EFE6; --gold:#C9A24B; --moss:#3E5C4E; --moss-deep:#22352C; }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-  }
+  body{ background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; min-height:100vh; }
+  .wrap{ max-width:720px; margin:0 auto; padding:24px; }
 
-  .stage{
-    width:100%;
-    max-width:560px;
-  }
+  nav{ display:flex; gap:18px; flex-wrap:wrap; margin-bottom:48px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.05em; }
+  nav a{ color:var(--moss); text-decoration:none; text-transform:uppercase; }
+  nav a:hover{ color:var(--gold); }
 
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--moss);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:18px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:22px;
-    height:1px;
-    background:var(--moss);
-    display:inline-block;
-  }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss); display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--moss); display:inline-block; }
 
-  h1{
-    font-family:'Fraunces',serif;
-    font-weight:600;
-    font-size:clamp(30px,5vw,42px);
-    line-height:1.08;
-    margin:0 0 14px;
-    letter-spacing:-0.01em;
-  }
-  h1 em{
-    font-style:italic;
-    color:var(--gold);
-  }
+  h1{ font-family:'Fraunces',serif; font-weight:600; font-size:clamp(32px,6vw,46px); line-height:1.08; margin:0 0 16px; letter-spacing:-0.01em; }
+  h1 em{ font-style:italic; color:var(--gold); }
 
-  .sub{
-    font-size:15.5px;
-    line-height:1.55;
-    color:#3A423D;
-    margin:0 0 34px;
-    max-width:46ch;
-  }
+  .sub{ font-size:16px; line-height:1.6; color:#3A423D; margin:0 0 44px; max-width:52ch; }
 
-  .card{
-    background:var(--moss-deep);
-    color:var(--paper);
-    border-radius:2px;
-    padding:36px 32px;
-    position:relative;
-    overflow:hidden;
+  .cards{ display:flex; flex-direction:column; gap:16px; margin-bottom:56px; }
+  .toolcard{
+    display:block; text-decoration:none; color:inherit;
+    background:var(--moss-deep); color:var(--paper);
+    padding:26px 28px; position:relative; overflow:hidden;
   }
-  .card::before{
-    content:"";
-    position:absolute;
-    top:0;left:0;right:0;
-    height:3px;
-    background:linear-gradient(90deg,var(--gold),transparent 70%);
-  }
+  .toolcard::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--gold),transparent 70%); }
+  .toolcard .tag{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; display:block; }
+  .toolcard h2{ font-family:'Fraunces',serif; font-weight:600; font-size:24px; margin:0 0 8px; }
+  .toolcard p{ font-size:14.5px; line-height:1.55; color:#C7D0C8; margin:0; }
+  .toolcard .arrow{ position:absolute; right:26px; top:50%; transform:translateY(-50%); font-size:22px; color:var(--gold); }
 
-  label{
-    display:block;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11.5px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:#B9C4B9;
-    margin-bottom:10px;
-  }
+  section.about-blurb{ margin-bottom:56px; }
+  section.about-blurb h3{ font-family:'Fraunces',serif; font-size:19px; margin:0 0 10px; }
+  section.about-blurb p{ font-size:14.5px; line-height:1.65; color:#3A423D; max-width:60ch; }
 
-  .input-row{
+  footer{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#8B948B; display:flex; gap:16px; flex-wrap:wrap; border-top:1px solid rgba(15,26,22,0.12); padding-top:20px; }
+  footer a{ color:#8B948B; }
+  footer a:hover{ color:var(--gold); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a href="/">Home</a>
+    <a href="/income/">Income Tool</a>
+    <a href="/height-percentile/">Height Tool</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+
+  <div class="eyebrow">A small collection of global comparisons</div>
+  <h1>See where you stand, <em>compared</em> to the rest of the world.</h1>
+  <p class="sub">A growing set of quick, honest tools that turn everyday personal numbers — income, height, and more to come — into a sense of where you sit among billions of other people.</p>
+
+  <div class="cards">
+    <a class="toolcard" href="/income/">
+      <span class="tag">Global Income Position</span>
+      <h2>Where do you stand among 8 billion people?</h2>
+      <p>Enter your monthly income and see what share of the world earns less than you.</p>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="toolcard" href="/height-percentile/">
+      <span class="tag">Global Height Position</span>
+      <h2>How tall are you, really?</h2>
+      <p>See what share of adults worldwide are shorter than you, based on global averages.</p>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <section class="about-blurb">
+    <h3>Why this site exists</h3>
+    <p>Numbers like income or height feel abstract until you see them next to the rest of the world. These tools aren't meant to be precise scientific instruments — they use publicly available, well-known global averages and distributions to give you a rough, honest sense of perspective in a few seconds. More comparisons are on the way.</p>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 Compared</span>
+    <a href="/privacy/">Privacy Policy</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </footer>
+</div>
+</body>
+</html>  .input-row{
     display:flex;
     align-items:stretch;
     border:1px solid rgba(241,239,230,0.25);
