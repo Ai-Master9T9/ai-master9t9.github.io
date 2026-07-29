@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,381 +12,293 @@
     enable_page_level_ads: true
   });
 </script>
-<title>Compared — Fun Global Comparison Tools</title>
+<title>Compared — See Where You Stand in the World</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
-  :root{ --ink:#0F1A16; --paper:#F1EFE6; --gold:#C9A24B; --moss:#3E5C4E; --moss-deep:#22352C; }
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#0F1A16;
+    --paper:#F1EFE6;
+    --paper2:#E9E5D6;
+    --gold:#C9A24B;
+    --gold-soft:#E3C077;
+    --moss:#3E5C4E;
+    --moss-deep:#22352C;
+    --moss-deeper:#182620;
+  }
+
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{ background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; min-height:100vh; }
-  .wrap{ max-width:720px; margin:0 auto; padding:24px; }
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0; overflow-x:hidden;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    width:100%;
+  }
 
-  nav{ display:flex; gap:18px; flex-wrap:wrap; margin-bottom:48px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.05em; }
-  nav a{ color:var(--moss); text-decoration:none; text-transform:uppercase; }
-  nav a:hover{ color:var(--gold); }
+  a{ text-decoration:none; }
 
-  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss); display:flex; align-items:center; gap:10px; margin-bottom:18px; }
-  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--moss); display:inline-block; }
+  /* ---------- top nav ---------- */
+  .topnav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    max-width:920px;
+    margin:0 auto;
+    padding:20px 20px 0;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .brand{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  .brand span{ color:var(--gold); }
+  .navlinks{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  .navlinks a{ color:var(--moss); white-space:nowrap; }
+  .navlinks a:hover{ color:var(--gold); }
 
-  h1{ font-family:'Fraunces',serif; font-weight:600; font-size:clamp(32px,6vw,46px); line-height:1.08; margin:0 0 16px; letter-spacing:-0.01em; }
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    max-width:920px;
+    margin:0 auto;
+    padding:56px 20px 48px;
+    overflow:hidden;
+  }
+  .hero-dots{
+    position:absolute;
+    top:-30px; right:-30px;
+    width:200px; height:200px;
+    opacity:0.4;
+    pointer-events:none;
+  }
+  @media(max-width:600px){
+    .hero-dots{ width:130px; height:130px; top:-15px; right:-25px; opacity:0.3; }
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--moss);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+    position:relative;
+  }
+  .eyebrow::before{ content:""; width:26px; height:1px; background:var(--moss); display:inline-block; }
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,8vw,64px);
+    line-height:1.06;
+    margin:0 0 20px;
+    letter-spacing:-0.015em;
+    max-width:14ch;
+    position:relative;
+  }
   h1 em{ font-style:italic; color:var(--gold); }
 
-  .sub{ font-size:16px; line-height:1.6; color:#3A423D; margin:0 0 44px; max-width:52ch; }
-
-  .cards{ display:flex; flex-direction:column; gap:16px; margin-bottom:56px; }
-  .toolcard{
-    display:block; text-decoration:none; color:inherit;
-    background:var(--moss-deep); color:var(--paper);
-    padding:26px 28px; position:relative; overflow:hidden;
+  .sub{
+    font-size:16px;
+    line-height:1.6;
+    color:#3A423D;
+    margin:0 0 8px;
+    max-width:50ch;
+    position:relative;
   }
-  .toolcard::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--gold),transparent 70%); }
-  .toolcard .tag{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; display:block; }
-  .toolcard h2{ font-family:'Fraunces',serif; font-weight:600; font-size:24px; margin:0 0 8px; }
-  .toolcard p{ font-size:14.5px; line-height:1.55; color:#C7D0C8; margin:0; }
-  .toolcard .arrow{ position:absolute; right:26px; top:50%; transform:translateY(-50%); font-size:22px; color:var(--gold); }
 
-  section.about-blurb{ margin-bottom:56px; }
-  section.about-blurb h3{ font-family:'Fraunces',serif; font-size:19px; margin:0 0 10px; }
-  section.about-blurb p{ font-size:14.5px; line-height:1.65; color:#3A423D; max-width:60ch; }
+  .hero-stats{
+    display:flex;
+    gap:28px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+  .stat b{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:30px;
+    color:var(--moss-deep);
+    line-height:1;
+  }
+  .stat span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:#7C8C7E;
+  }
 
-  footer{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#8B948B; display:flex; gap:16px; flex-wrap:wrap; border-top:1px solid rgba(15,26,22,0.12); padding-top:20px; }
+  /* ---------- tool cards ---------- */
+  .toolsection{ max-width:920px; margin:0 auto; padding:4px 20px 56px; }
+  .section-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--moss);
+    margin-bottom:18px;
+  }
+
+  .cards{ display:grid; gap:14px; grid-template-columns:1fr; }
+  @media(min-width:680px){ .cards{ grid-template-columns:1fr 1fr; gap:16px; } }
+
+  .toolcard{
+    display:block;
+    color:inherit;
+    background:var(--moss-deep);
+    padding:26px 24px 72px;
+    position:relative;
+    overflow:hidden;
+    min-height:160px;
+    transition:transform .18s ease, background .18s ease;
+  }
+  .toolcard:hover{ background:var(--moss-deeper); transform:translateY(-3px); }
+  .toolcard::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--gold),transparent 75%);
+  }
+  .toolcard .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:10px; display:block;
+  }
+  .toolcard h2{ font-family:'Fraunces',serif; font-weight:600; font-size:23px; margin:0 0 10px; color:var(--paper); line-height:1.15; }
+  .toolcard p{ font-size:14px; line-height:1.55; color:#C7D0C8; margin:0; max-width:32ch; }
+  .toolcard .arrow{
+    position:absolute; left:24px; bottom:22px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--gold-soft);
+    display:flex; align-items:center; gap:8px;
+  }
+  .toolcard .arrow::after{ content:"→"; transition:transform .18s ease; }
+  .toolcard:hover .arrow::after{ transform:translateX(4px); }
+
+  .toolcard.soon{
+    background:transparent;
+    border:1px dashed rgba(15,26,22,0.25);
+  }
+  .toolcard.soon::before{ display:none; }
+  .toolcard.soon .tag{ color:var(--moss); }
+  .toolcard.soon h2{ color:var(--ink); }
+  .toolcard.soon p{ color:#5C665F; }
+  .toolcard.soon .arrow{ color:var(--moss); }
+
+  /* ---------- about band ---------- */
+  .aboutband{ background:var(--paper2); }
+  .aboutband-inner{ max-width:920px; margin:0 auto; padding:56px 24px; }
+  .aboutband h3{ font-family:'Fraunces',serif; font-size:22px; margin:0 0 14px; max-width:30ch; }
+  .aboutband p{ font-size:15px; line-height:1.75; color:#3A423D; max-width:62ch; margin:0 0 14px; }
+
+  footer{
+    max-width:920px; margin:0 auto; padding:28px 24px 40px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px; color:#8B948B;
+    display:flex; gap:18px; flex-wrap:wrap;
+    border-top:1px solid rgba(15,26,22,0.12);
+  }
   footer a{ color:#8B948B; }
   footer a:hover{ color:var(--gold); }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <nav>
-    <a href="/">Home</a>
-    <a href="/income/">Income Tool</a>
-    <a href="/height-percentile/">Height Tool</a>
+
+<div class="topnav">
+  <div class="brand">Compared<span>.</span></div>
+  <div class="navlinks">
+    <a href="/income/">Income</a>
+    <a href="/height-percentile/">Height</a>
     <a href="/about/">About</a>
     <a href="/contact/">Contact</a>
-  </nav>
+  </div>
+</div>
 
-  <div class="eyebrow">A small collection of global comparisons</div>
-  <h1>See where you stand, <em>compared</em> to the rest of the world.</h1>
-  <p class="sub">A growing set of quick, honest tools that turn everyday personal numbers — income, height, and more to come — into a sense of where you sit among billions of other people.</p>
+<div class="hero">
+  <svg class="hero-dots" viewBox="0 0 280 280" fill="none">
+    <g fill="#C9A24B">
+      <circle cx="20" cy="20" r="3"/><circle cx="45" cy="20" r="3"/><circle cx="70" cy="20" r="3"/><circle cx="95" cy="20" r="3"/><circle cx="120" cy="20" r="3"/>
+      <circle cx="20" cy="45" r="3"/><circle cx="45" cy="45" r="3"/><circle cx="70" cy="45" r="3"/><circle cx="95" cy="45" r="3"/><circle cx="120" cy="45" r="3"/>
+      <circle cx="20" cy="70" r="3"/><circle cx="45" cy="70" r="3"/><circle cx="70" cy="70" r="3"/><circle cx="95" cy="70" r="3"/>
+      <circle cx="20" cy="95" r="3"/><circle cx="45" cy="95" r="3"/><circle cx="70" cy="95" r="3"/>
+      <circle cx="20" cy="120" r="3"/><circle cx="45" cy="120" r="3"/>
+      <circle cx="150" cy="150" r="3"/><circle cx="175" cy="150" r="3"/><circle cx="200" cy="150" r="3"/><circle cx="225" cy="150" r="3"/><circle cx="250" cy="150" r="3"/>
+      <circle cx="150" cy="175" r="3"/><circle cx="175" cy="175" r="3"/><circle cx="200" cy="175" r="3"/><circle cx="225" cy="175" r="3"/><circle cx="250" cy="175" r="3"/>
+      <circle cx="150" cy="200" r="3"/><circle cx="175" cy="200" r="3"/><circle cx="200" cy="200" r="3"/><circle cx="225" cy="200" r="3"/>
+      <circle cx="150" cy="225" r="3"/><circle cx="175" cy="225" r="3"/><circle cx="200" cy="225" r="3"/>
+      <circle cx="150" cy="250" r="3"/><circle cx="175" cy="250" r="3"/>
+    </g>
+  </svg>
 
+  <div class="eyebrow">A collection of global comparisons</div>
+  <h1>See where you stand, <em>compared</em> to the world.</h1>
+  <p class="sub">A growing set of quick, honest tools that turn everyday personal numbers into a sense of where you sit among billions of other people.</p>
+
+  <div class="hero-stats">
+    <div class="stat"><b>8B+</b><span>People compared against</span></div>
+    <div class="stat"><b>2</b><span>Tools live today</span></div>
+    <div class="stat"><b>&lt;1 min</b><span>To get your result</span></div>
+  </div>
+</div>
+
+<div class="toolsection">
+  <div class="section-label">Choose a comparison</div>
   <div class="cards">
     <a class="toolcard" href="/income/">
       <span class="tag">Global Income Position</span>
       <h2>Where do you stand among 8 billion people?</h2>
       <p>Enter your monthly income and see what share of the world earns less than you.</p>
-      <span class="arrow">→</span>
+      <span class="arrow">See my rank</span>
     </a>
 
     <a class="toolcard" href="/height-percentile/">
       <span class="tag">Global Height Position</span>
       <h2>How tall are you, really?</h2>
       <p>See what share of adults worldwide are shorter than you, based on global averages.</p>
-      <span class="arrow">→</span>
+      <span class="arrow">See my rank</span>
     </a>
-  </div>
 
-  <section class="about-blurb">
+    <div class="toolcard soon">
+      <span class="tag">Coming soon</span>
+      <h2>More comparisons on the way</h2>
+      <p>New tools are being added regularly — check back soon.</p>
+      <span class="arrow">In progress</span>
+    </div>
+  </div>
+</div>
+
+<div class="aboutband">
+  <div class="aboutband-inner">
     <h3>Why this site exists</h3>
-    <p>Numbers like income or height feel abstract until you see them next to the rest of the world. These tools aren't meant to be precise scientific instruments — they use publicly available, well-known global averages and distributions to give you a rough, honest sense of perspective in a few seconds. More comparisons are on the way.</p>
-  </section>
-
-  <footer>
-    <span>&copy; 2026 Compared</span>
-    <a href="/privacy/">Privacy Policy</a>
-    <a href="/about/">About</a>
-    <a href="/contact/">Contact</a>
-  </footer>
-</div>
-</body>
-</html>  .input-row{
-    display:flex;
-    align-items:stretch;
-    border:1px solid rgba(241,239,230,0.25);
-    background:rgba(241,239,230,0.04);
-  }
-  .input-row .prefix{
-    display:flex;
-    align-items:center;
-    padding:0 14px;
-    font-family:'IBM Plex Mono',monospace;
-    color:var(--gold);
-    font-size:15px;
-    border-right:1px solid rgba(241,239,230,0.18);
-  }
-  input[type="number"]{
-    flex:1;
-    background:transparent;
-    border:none;
-    outline:none;
-    color:var(--paper);
-    font-family:'Fraunces',serif;
-    font-size:26px;
-    padding:14px 16px;
-    width:100%;
-  }
-  input[type="number"]::placeholder{ color:rgba(241,239,230,0.35); font-family:'Inter',sans-serif; font-size:16px;}
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0;}
-
-  select{
-    background:rgba(241,239,230,0.04);
-    border:none;
-    border-left:1px solid rgba(241,239,230,0.18);
-    color:var(--paper);
-    font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
-    padding:0 12px;
-    outline:none;
-  }
-  select option{ color:#0F1A16; }
-
-  .hint{
-    font-size:12.5px;
-    color:#93A196;
-    margin-top:10px;
-  }
-
-  button.go{
-    margin-top:26px;
-    width:100%;
-    background:var(--gold);
-    color:var(--moss-deep);
-    border:none;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    padding:16px;
-    cursor:pointer;
-    transition:transform .15s ease, background .15s ease;
-  }
-  button.go:hover{ background:#DDB865; }
-  button.go:active{ transform:scale(0.985); }
-  button.go:disabled{ opacity:0.5; cursor:not-allowed; }
-
-  .error{
-    color:#E8A0A0;
-    font-size:12.5px;
-    margin-top:10px;
-    min-height:16px;
-  }
-
-  /* ---- Result screen ---- */
-  .result{ display:none; }
-  .result.active{ display:block; }
-
-  .bigstat{
-    font-family:'Fraunces',serif;
-    font-weight:700;
-    font-size:clamp(52px,12vw,76px);
-    line-height:1;
-    color:var(--gold);
-    margin:6px 0 4px;
-  }
-  .bigstat sup{ font-size:0.4em; top:-0.6em; }
-  .result-label{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:#B9C4B9;
-  }
-  .result-copy{
-    font-size:15px;
-    line-height:1.6;
-    color:#D6DDD6;
-    margin:18px 0 26px;
-  }
-  .result-copy b{ color:var(--paper); }
-
-  .spectrum{
-    position:relative;
-    height:8px;
-    background:rgba(241,239,230,0.12);
-    border-radius:4px;
-    margin:20px 0 10px;
-  }
-  .spectrum .fill{
-    position:absolute; left:0; top:0; bottom:0;
-    background:var(--gold);
-    border-radius:4px;
-    width:0%;
-    transition:width 1.1s cubic-bezier(.2,.8,.2,1);
-  }
-  .spectrum .marker{
-    position:absolute;
-    top:-6px;
-    width:2px; height:20px;
-    background:var(--paper);
-    left:0%;
-    transition:left 1.1s cubic-bezier(.2,.8,.2,1);
-  }
-  .spectrum-labels{
-    display:flex; justify-content:space-between;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:10.5px;
-    color:#7C8C7E;
-    margin-bottom:28px;
-  }
-
-  .again{
-    background:transparent;
-    border:1px solid rgba(241,239,230,0.3);
-    color:var(--paper);
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    padding:12px 18px;
-    cursor:pointer;
-  }
-  .again:hover{ border-color:var(--gold); color:var(--gold); }
-
-  .foot-note{
-    font-size:11.5px;
-    color:#8B948B;
-    margin-top:22px;
-    line-height:1.5;
-  }
-</style>
-</head>
-<body>
-
-<div class="stage">
-  <div class="eyebrow">Global Income Position</div>
-  <h1>Where do you stand among <em>8 billion</em> people?</h1>
-  <p class="sub">Enter what you earn in a typical month. We'll estimate what share of the world's population earns less than you — based on global income distribution data.</p>
-
-  <div class="card">
-
-    <!-- STEP 1: FORM -->
-    <div class="form active" id="formStep">
-      <label for="income">Monthly income</label>
-      <div class="input-row">
-        <span class="prefix">$</span>
-        <input type="number" id="income" placeholder="e.g. 2500" min="0" step="1">
-        <select id="currency">
-          <option value="1">USD</option>
-        </select>
-      </div>
-      <div class="hint">We convert this to a global comparison automatically. All figures are approximate estimates, not official statistics.</div>
-      <div class="error" id="errorMsg"></div>
-      <button class="go" id="submitBtn">See my global rank</button>
-    </div>
-
-    <!-- STEP 2: RESULT -->
-    <div class="result" id="resultStep">
-      <div class="result-label">You earn more than</div>
-      <div class="bigstat" id="pctBig">—<sup>%</sup></div>
-      <div class="result-copy" id="resultCopy"></div>
-
-      <div class="spectrum">
-        <div class="fill" id="fill"></div>
-        <div class="marker" id="marker"></div>
-      </div>
-      <div class="spectrum-labels">
-        <span>Poorest</span>
-        <span>Richest</span>
-      </div>
-
-      <button class="again" id="againBtn">Check another amount</button>
-    </div>
-
+    <p>Numbers like income or height feel abstract until you see them next to the rest of the world. These tools aren't meant to be precise scientific instruments — they use publicly available, well-known global averages and distributions to give you a rough, honest sense of perspective in a few seconds.</p>
+    <p>This site is supported by advertising, which keeps every tool free to use with no sign-up required.</p>
   </div>
-
-  <p class="foot-note">Estimates derived from published global household income distribution figures (World Bank / World Inequality Database style deciles). Intended as a rough, illustrative comparison — not a precise or official ranking.</p>
 </div>
 
-<script>
-  // ---- Approximate global monthly income (USD) -> percentile below you ----
-  // Anchors loosely based on public global income distribution estimates.
-  // (income in USD/month, percentile of world population earning less)
-  const anchors = [
-    [0, 0],
-    [15, 8],
-    [30, 20],
-    [50, 33],
-    [83, 50],
-    [120, 60],
-    [180, 68],
-    [260, 75],
-    [400, 82],
-    [600, 87],
-    [850, 90.5],
-    [1200, 93],
-    [1800, 95],
-    [2500, 96.5],
-    [4000, 98],
-    [6500, 99],
-    [10000, 99.5],
-    [20000, 99.8],
-    [50000, 99.95],
-    [200000, 99.99]
-  ];
-
-  function percentileFor(income){
-    if(income <= 0) return 0;
-    if(income >= anchors[anchors.length-1][0]) return 99.99;
-
-    for(let i=0;i<anchors.length-1;i++){
-      const [x0,y0] = anchors[i];
-      const [x1,y1] = anchors[i+1];
-      if(income >= x0 && income <= x1){
-        // log-interpolate on income, linear on percentile
-        const logx0 = Math.log(Math.max(x0,1));
-        const logx1 = Math.log(x1);
-        const logx = Math.log(Math.max(income,1));
-        const t = (logx - logx0) / (logx1 - logx0 || 1);
-        return y0 + t*(y1-y0);
-      }
-    }
-    return 50;
-  }
-
-  const formStep = document.getElementById('formStep');
-  const resultStep = document.getElementById('resultStep');
-  const incomeInput = document.getElementById('income');
-  const errorMsg = document.getElementById('errorMsg');
-  const submitBtn = document.getElementById('submitBtn');
-  const pctBig = document.getElementById('pctBig');
-  const resultCopy = document.getElementById('resultCopy');
-  const fill = document.getElementById('fill');
-  const marker = document.getElementById('marker');
-  const againBtn = document.getElementById('againBtn');
-
-  submitBtn.addEventListener('click', () => {
-    const val = parseFloat(incomeInput.value);
-    if(isNaN(val) || val < 0){
-      errorMsg.textContent = 'Enter a valid monthly income to continue.';
-      return;
-    }
-    errorMsg.textContent = '';
-    formStep.style.display = 'none';
-    showResult(val);
-  });
-
-  function showResult(income){
-    resultStep.classList.add('active');
-
-    const pct = percentileFor(income);
-    const pctDisplay = pct >= 99.9 ? pct.toFixed(2) : pct.toFixed(1);
-
-    pctBig.innerHTML = pctDisplay + '<sup>%</sup>';
-    resultCopy.innerHTML = `At <b>$${income.toLocaleString()}</b> a month, you earn more than an estimated <b>${pctDisplay}%</b> of people worldwide — putting you in roughly the top <b>${(100-pct).toFixed(pct>=99.9?2:1)}%</b> globally.`;
-
-    requestAnimationFrame(() => {
-      fill.style.width = pct + '%';
-      marker.style.left = pct + '%';
-    });
-  }
-
-  againBtn.addEventListener('click', () => {
-    resultStep.classList.remove('active');
-    fill.style.width = '0%';
-    marker.style.left = '0%';
-    incomeInput.value = '';
-    formStep.style.display = 'block';
-  });
-</script>
+<footer>
+  <span>&copy; 2026 Compared</span>
+  <a href="/privacy/">Privacy Policy</a>
+  <a href="/about/">About</a>
+  <a href="/contact/">Contact</a>
+</footer>
 
 </body>
 </html>
