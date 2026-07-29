@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5475317400885195"
+     crossorigin="anonymous"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5475317400885195",
+    enable_page_level_ads: true
+  });
+</script>
+<title>How Rare Is Your Birthday?</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#0F1A16;
+    --paper:#F1EFE6;
+    --gold:#C9A24B;
+    --moss:#3E5C4E;
+    --moss-deep:#22352C;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0; overflow-x:hidden;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .stage{ width:100%; max-width:560px; }
+
+  nav{ display:flex; gap:18px; flex-wrap:wrap; margin-bottom:36px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.05em; }
+  nav a{ color:var(--moss); text-decoration:none; text-transform:uppercase; }
+  nav a:hover{ color:var(--gold); }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--moss);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--moss); display:inline-block; }
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(30px,5vw,42px);
+    line-height:1.08;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  h1 em{ font-style:italic; color:var(--gold); }
+
+  .sub{
+    font-size:15.5px;
+    line-height:1.55;
+    color:#3A423D;
+    margin:0 0 34px;
+    max-width:46ch;
+  }
+
+  .card{
+    background:var(--moss-deep);
+    color:var(--paper);
+    border-radius:2px;
+    padding:36px 32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;
+    height:3px;
+    background:linear-gradient(90deg,var(--gold),transparent 70%);
+  }
+
+  label{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#B9C4B9;
+    margin-bottom:10px;
+  }
+
+  .input-row{
+    display:flex;
+    align-items:stretch;
+    border:1px solid rgba(241,239,230,0.25);
+    background:rgba(241,239,230,0.04);
+  }
+  select.datepart{
+    flex:1;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--paper);
+    font-family:'Fraunces',serif;
+    font-size:18px;
+    padding:14px 12px;
+    -webkit-appearance:none;
+    appearance:none;
+  }
+  select.datepart option{ color:#0F1A16; font-family:'Inter',sans-serif; font-size:15px; }
+  .input-row .divider{ width:1px; background:rgba(241,239,230,0.18); }
+
+  .hint{ font-size:12.5px; color:#93A196; margin-top:10px; }
+
+  button.go{
+    margin-top:26px;
+    width:100%;
+    background:var(--gold);
+    color:var(--moss-deep);
+    border:none;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:16px;
+    cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+  }
+  button.go:hover{ background:#DDB865; }
+  button.go:active{ transform:scale(0.985); }
+
+  .error{ color:#E8A0A0; font-size:12.5px; margin-top:10px; min-height:16px; }
+
+  .result{ display:none; }
+  .result.active{ display:block; }
+
+  .bigstat{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:clamp(48px,11vw,72px);
+    line-height:1;
+    color:var(--gold);
+    margin:6px 0 4px;
+  }
+  .bigstat sup{ font-size:0.4em; top:-0.6em; }
+  .result-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#B9C4B9;
+  }
+  .result-copy{
+    font-size:15px;
+    line-height:1.6;
+    color:#D6DDD6;
+    margin:18px 0 26px;
+  }
+  .result-copy b{ color:var(--paper); }
+
+  .spectrum{
+    position:relative;
+    height:8px;
+    background:rgba(241,239,230,0.12);
+    border-radius:4px;
+    margin:20px 0 10px;
+  }
+  .spectrum .fill{
+    position:absolute; left:0; top:0; bottom:0;
+    background:var(--gold);
+    border-radius:4px;
+    width:0%;
+    transition:width 1.1s cubic-bezier(.2,.8,.2,1);
+  }
+  .spectrum .marker{
+    position:absolute;
+    top:-6px;
+    width:2px; height:20px;
+    background:var(--paper);
+    left:0%;
+    transition:left 1.1s cubic-bezier(.2,.8,.2,1);
+  }
+  .spectrum-labels{
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:#7C8C7E;
+    margin-bottom:28px;
+  }
+
+  .again{
+    background:transparent;
+    border:1px solid rgba(241,239,230,0.3);
+    color:var(--paper);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:12px 18px;
+    cursor:pointer;
+  }
+  .again:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .foot-note{ font-size:11.5px; color:#8B948B; margin-top:22px; line-height:1.5; }
+
+  .article{ margin-top:52px; }
+  .article h2{ font-family:'Fraunces',serif; font-size:21px; margin:0 0 12px; }
+  .article p{ font-size:14.5px; line-height:1.7; color:#3A423D; margin:0 0 16px; max-width:60ch; }
+
+  footer{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#8B948B;
+    display:flex; gap:16px; flex-wrap:wrap;
+    border-top:1px solid rgba(15,26,22,0.12);
+    padding-top:20px; margin-top:52px;
+  }
+  footer a{ color:#8B948B; }
+  footer a:hover{ color:var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <nav>
+    <a href="/">Home</a>
+    <a href="/income/">Income Tool</a>
+    <a href="/height-percentile/">Height Tool</a>
+    <a href="/birthday-rarity/">Birthday Tool</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+
+  <div class="eyebrow">Global Birthday Position</div>
+  <h1>How <em>rare</em> is your birthday, really?</h1>
+  <p class="sub">Birthdays aren't spread evenly across the year. Pick your birth month and day, and we'll estimate how common or rare it is compared to every other date.</p>
+
+  <div class="card">
+
+    <div id="formStep">
+      <label>Your birth date</label>
+      <div class="input-row">
+        <select class="datepart" id="month"></select>
+        <div class="divider"></div>
+        <select class="datepart" id="day"></select>
+      </div>
+      <div class="hint">We compare this against typical global birth-rate patterns by date. All figures are approximate estimates, not official statistics.</div>
+      <div class="error" id="errorMsg"></div>
+      <button class="go" id="submitBtn">See how rare it is</button>
+    </div>
+
+    <div class="result" id="resultStep">
+      <div class="result-label" id="resultLabel">This birthday is</div>
+      <div class="bigstat" id="pctBig">—<sup>%</sup></div>
+      <div class="result-copy" id="resultCopy"></div>
+
+      <div class="spectrum">
+        <div class="fill" id="fill"></div>
+        <div class="marker" id="marker"></div>
+      </div>
+      <div class="spectrum-labels">
+        <span>Rarest</span>
+        <span>Most common</span>
+      </div>
+
+      <button class="again" id="againBtn">Check another date</button>
+    </div>
+
+  </div>
+
+  <p class="foot-note">Estimates are based on well-documented general patterns in birth-rate seasonality and known dips around major holidays. Intended as a rough, illustrative comparison — not official vital-statistics data.</p>
+
+  <div class="article">
+    <h2>Why some birthdays are more common than others</h2>
+    <p>Births aren't evenly spread across the calendar. In many countries, late-summer and early-autumn months see noticeably more births, a pattern often linked to conception timing around the winter holidays roughly nine months earlier. Meanwhile, certain specific dates are consistently rarer — most notably major holidays like New Year's Day, Christmas, and the days immediately around them.</p>
+    <p>Part of this is natural seasonal biology, and part of it is logistical: many scheduled inductions and C-sections are deliberately planned around weekdays and away from holidays, which further reduces births on those specific dates.</p>
+    <h2>How this estimate is built</h2>
+    <p>This tool models the general shape of birth-rate seasonality reported in widely cited population data, combined with known dips around major holiday dates, to rank how common or rare each day of the year is relative to all others. It's built for a fun sense of perspective, not as a precise statistical record.</p>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 Compared</span>
+    <a href="/privacy/">Privacy Policy</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+  </footer>
+</div>
+
+<script>
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const daysInMonth = [31,29,31,30,31,30,31,31,30,31,30,31];
+
+  const monthSel = document.getElementById('month');
+  const daySel = document.getElementById('day');
+
+  months.forEach((m,i) => {
+    const opt = document.createElement('option');
+    opt.value = i+1; opt.textContent = m;
+    monthSel.appendChild(opt);
+  });
+
+  function populateDays(){
+    const m = parseInt(monthSel.value || 1);
+    const count = daysInMonth[m-1];
+    const prev = daySel.value;
+    daySel.innerHTML = '';
+    for(let d=1; d<=count; d++){
+      const opt = document.createElement('option');
+      opt.value = d; opt.textContent = d;
+      daySel.appendChild(opt);
+    }
+    if(prev && prev <= count) daySel.value = prev;
+  }
+  monthSel.value = 1;
+  populateDays();
+  monthSel.addEventListener('change', populateDays);
+
+  // ---- Approximate day-of-year popularity model ----
+  function dayOfYear(month, day){
+    const cum = [0,31,59,90,120,151,181,212,243,273,304,334];
+    return cum[month-1] + day;
+  }
+
+  // Holiday/notable-date popularity adjustments (month, day, multiplier)
+  const holidayAdjust = {
+    "1-1": 0.55, "12-31": 0.65, "12-25": 0.5, "12-24": 0.6, "12-26": 0.75,
+    "7-4": 0.75, "11-1": 0.8, "10-31": 0.85, "2-14": 1.05, "9-9": 1.05, "9-19": 1.05,
+    "1-2": 0.85, "12-23": 0.75
+  };
+
+  function popularityScore(month, day){
+    const doy = dayOfYear(month, day);
+    // Seasonal wave peaking mid-to-late September (~day 263), trough in spring
+    const base = 1 + 0.22 * Math.cos((2*Math.PI*(doy-263))/365);
+    const key = month + "-" + day;
+    const adj = holidayAdjust[key] || 1;
+    return base * adj;
+  }
+
+  // Precompute all 366 days once
+  const allScores = [];
+  for(let m=1; m<=12; m++){
+    for(let d=1; d<=daysInMonth[m-1]; d++){
+      allScores.push(popularityScore(m,d));
+    }
+  }
+  const sortedScores = [...allScores].sort((a,b) => a-b);
+
+  function rarityPercentile(month, day){
+    const score = popularityScore(month, day);
+    // rank among all days: what % of days are MORE common (higher score) than this one
+    let countLower = 0;
+    for(const s of sortedScores){ if(s < score) countLower++; }
+    const commonPct = (countLower / sortedScores.length) * 100; // higher = more common
+    return commonPct;
+  }
+
+  const formStep = document.getElementById('formStep');
+  const resultStep = document.getElementById('resultStep');
+  const errorMsg = document.getElementById('errorMsg');
+  const submitBtn = document.getElementById('submitBtn');
+  const pctBig = document.getElementById('pctBig');
+  const resultCopy = document.getElementById('resultCopy');
+  const resultLabel = document.getElementById('resultLabel');
+  const fill = document.getElementById('fill');
+  const marker = document.getElementById('marker');
+  const againBtn = document.getElementById('againBtn');
+
+  submitBtn.addEventListener('click', () => {
+    const m = parseInt(monthSel.value);
+    const d = parseInt(daySel.value);
+    if(!m || !d){
+      errorMsg.textContent = 'Select a valid date to continue.';
+      return;
+    }
+    errorMsg.textContent = '';
+    formStep.style.display = 'none';
+    showResult(m,d);
+  });
+
+  function showResult(month, day){
+    resultStep.classList.add('active');
+    const commonPct = rarityPercentile(month, day);
+    const rarityPct = 100 - commonPct;
+    const dateLabel = months[month-1] + " " + day;
+
+    const display = rarityPct.toFixed(1);
+    pctBig.innerHTML = display + '<sup>%</sup>';
+    resultLabel.textContent = dateLabel + " is rarer than";
+    resultCopy.innerHTML = `<b>${dateLabel}</b> is estimated to be rarer than about <b>${display}%</b> of all birthdays — making it more common than roughly <b>${commonPct.toFixed(1)}%</b> of dates on the calendar.`;
+
+    requestAnimationFrame(() => {
+      fill.style.width = commonPct + '%';
+      marker.style.left = commonPct + '%';
+    });
+  }
+
+  againBtn.addEventListener('click', () => {
+    resultStep.classList.remove('active');
+    fill.style.width = '0%';
+    marker.style.left = '0%';
+    formStep.style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
